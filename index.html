@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZAHIRA CASTILLO </title>
+    <meta name="description" content="Asesoría profesional en bienes raíces.">
+    <link rel="canonical" href="https://zahiramultykasas.github.io/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zahiramultykasas.github.io/">
+    <meta property="og:title" content="ZAHIRA CASTILLO | ASESORA INMOBILIARIA ">
+    <meta property="og:description" content="Asesoría profesional en bienes raíces. Propiedades de alto valor.">
+    <meta property="og:image" content="https://zahiramultykasas.github.io/ASSETS/IMAGES/LOGO MULTYKASAS.jpg">
+    <link rel="icon" href="ASSETS/IMAGES/LOGO MULTYKASAS.jpg" type="image/jpeg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-34GCWCK37X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-34GCWCK37X');
+    </script>
+</head>
+
+<body>
+    <!-- Video de fondo -->
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="ASSETS/VIDEO/VIDEO 1.mp4" type="video/mp4">
+    </video>
+
+    <main class="main-container">
+        <article class="profile-card">
+
+            <div class="profile-header">
+                <img src="ASSETS/IMAGES/LOGO MULTYKASAS.jpg" alt="Logotipo MULTYKASAS" class="profile-logo"
+                    fetchpriority="high" decoding="async">
+            </div>
+
+            <div class="profile-body">
+                <h1 class="profile-title">ZAHIRA CASTILLO | ASESORA INMOBILIARIA </h1>
+                <p class="profile-description">
+                    DONDE CADA RINCÓN GUARDA MOMENTOS POR CREAR
+                </p>
+            </div>
+
+            <div class="profile-cta">
+                <a href="listado.html" class="cta-button" target="_blank" rel="noopener noreferrer">
+                    CATÁLOGO DE PROPIEDADES
+                </a>
+            </div>
+
+            <nav class="social-bar">
+                <a href="https://www.facebook.com/profile.php?id=61565083200651" class="social-link facebook"
+                    target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://wa.me/+5216643567270" class="social-link whatsapp" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+            </nav>
+        </article>
+    </main>
+
+    <script>
+        const GITHUB_USER = "zahiramultykasas"; // CAMBIA ESTO
+
+        async function trackClick(platform) {
+            // 1. Registro en Google Analytics 4 (Métrica con Fechas)
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_social', {
+                    'plataforma': platform
+                });
+            }
+
+            try {
+                // 2. Registro en CounterAPI (Odómetro Total)
+                await fetch(`https://api.counterapi.dev/v1/${GITHUB_USER}/${platform}/up`, {
+                    keepalive: true,
+                    mode: 'no-cors'
+                });
+            } catch (error) {
+                // Falla silenciosa: si hay AdBlock, la página sigue funcionando perfecto
+            }
+        }
+
+        // Debounce para evitar clics accidentales múltiples
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        document.querySelectorAll('.social-link, .cta-button').forEach(el => {
+            el.addEventListener('click', debounce((e) => {
+                // Usamos 'el' en lugar de 'e.currentTarget' porque el evento expira tras el timeout
+                const platform = el.classList.contains('cta-button')
+                    ? 'catalogo'
+                    : el.className.split(' ')[1];
+
+                trackClick(platform);
+            }, 300));
+        });
+    </script>
+</body>
+
+</html>
